@@ -3,8 +3,7 @@ import jwt from "jsonwebtoken";
 import { AuthRequest } from "../types";
 import { AppError } from "./error.middleware";
 
-const JWT_SECRET =
-  process.env.JWT_SECRET || "your-secret-key-change-in-production";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export const authenticate = (
   req: AuthRequest,
@@ -19,7 +18,7 @@ export const authenticate = (
     }
 
     const token = authHeader.substring(7);
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
+    const decoded = jwt.verify(token, JWT_SECRET!) as any;
 
     req.user = {
       id: decoded.id,
