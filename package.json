@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "dev": "npx tsx watch ./src/server.ts",
+    "dev": "cross-env NODE_ENV=development npx tsx watch ./src/server.ts",
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,6 +26,7 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/pg": "^8.15.6",
+    "cross-env": "^10.1.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
