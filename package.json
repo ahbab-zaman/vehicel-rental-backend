@@ -2,7 +2,7 @@
   "name": "Vehicle Rental System",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
     "dev": "npx tsx watch ./src/server.ts",
     "build": "tsc",
