@@ -48,7 +48,7 @@ export class BookingController {
   ) {
     try {
 
-      const bookingId = parseInt(req.params.userId!);
+      const bookingId = parseInt(req.params.bookingId!);
       const booking = await BookingService.updateBooking(
         bookingId,
         req.body,

@@ -18,8 +18,7 @@ export const initializeDatabase = async () => {
         email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         phone VARCHAR(50) NOT NULL,
-        role VARCHAR(20) NOT NULL CHECK (role IN ('admin', 'customer')),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        role VARCHAR(20) NOT NULL CHECK (role IN ('admin', 'customer'))
       )
     `);
 
@@ -31,8 +30,7 @@ export const initializeDatabase = async () => {
         type VARCHAR(50) NOT NULL CHECK (type IN ('car', 'bike', 'van', 'SUV')),
         registration_number VARCHAR(50) UNIQUE NOT NULL,
         daily_rent_price DECIMAL(10, 2) NOT NULL CHECK (daily_rent_price > 0),
-        availability_status VARCHAR(20) NOT NULL CHECK (availability_status IN ('available', 'booked')),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        availability_status VARCHAR(20) NOT NULL CHECK (availability_status IN ('available', 'booked'))
       )
     `);
 
@@ -45,8 +43,7 @@ export const initializeDatabase = async () => {
         rent_start_date DATE NOT NULL,
         rent_end_date DATE NOT NULL CHECK (rent_end_date > rent_start_date),
         total_price DECIMAL(10, 2) NOT NULL CHECK (total_price > 0),
-        status VARCHAR(20) NOT NULL CHECK (status IN ('active', 'cancelled', 'returned')),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        status VARCHAR(20) NOT NULL CHECK (status IN ('active', 'cancelled', 'returned'))
       )
     `);
     console.log("✅ Database tables initialized successfully");
