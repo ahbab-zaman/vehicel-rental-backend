@@ -19,12 +19,6 @@ app.get("/", (req, res) => {
   res.json(
     successResponse("Vehicle Rental API is running", {
       version: "1.0.0",
-      endpoints: {
-        auth: "/api/v1/auth",
-        vehicles: "/api/v1/vehicles",
-        users: "/api/v1/users",
-        bookings: "/api/v1/bookings",
-      },
     })
   );
 });
