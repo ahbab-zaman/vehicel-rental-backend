@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { VehicleController } from "./vehicle.controller";
+import {
+  createVehicleController,
+  getAllVehiclesController,
+  getVehicleByIdController,
+  updateVehicleController,
+  deleteVehicleController,
+} from "./vehicle.controller";
 import { authenticate, authorize } from "../../middleware/auth.middleware";
 import { validateVehicle } from "../../middleware/validation.middleware";
 
@@ -10,22 +16,22 @@ router.post(
   authenticate,
   authorize("admin"),
   validateVehicle,
-  VehicleController.createVehicle
+  createVehicleController
 );
-router.get("/", VehicleController.getAllVehicles);
-router.get("/:vehicleId", VehicleController.getVehicleById);
+router.get("/", getAllVehiclesController);
+router.get("/:vehicleId", getVehicleByIdController);
 router.put(
   "/:vehicleId",
   authenticate,
   authorize("admin"),
   validateVehicle,
-  VehicleController.updateVehicle
+  updateVehicleController
 );
 router.delete(
   "/:vehicleId",
   authenticate,
   authorize("admin"),
-  VehicleController.deleteVehicle
+  deleteVehicleController
 );
 
 export default router;

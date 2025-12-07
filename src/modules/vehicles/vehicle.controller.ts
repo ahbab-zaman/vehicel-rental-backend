@@ -1,60 +1,84 @@
 import { Request, Response, NextFunction } from "express";
-import { VehicleService } from "./vehicle.service";
+import {
+  createVehicle,
+  getAllVehicles,
+  getVehicleById,
+  updateVehicle,
+  deleteVehicle,
+} from "./vehicle.service";
 import { successResponse } from "../../utils/responses";
 
-export class VehicleController {
-  static async createVehicle(req: Request, res: Response, next: NextFunction) {
-    try {
-      const vehicle = await VehicleService.createVehicle(req.body);
-      res
-        .status(201)
-        .json(successResponse("Vehicle created successfully", vehicle));
-    } catch (error) {
-      next(error);
-    }
+export const createVehicleController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const vehicle = await createVehicle(req.body);
+    res
+      .status(201)
+      .json(successResponse("Vehicle created successfully", vehicle));
+  } catch (error) {
+    next(error);
   }
+};
 
-  static async getAllVehicles(req: Request, res: Response, next: NextFunction) {
-    try {
-      const vehicles = await VehicleService.getAllVehicles();
+export const getAllVehiclesController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const vehicles = await getAllVehicles();
 
-      if (vehicles.length === 0) {
-        return res.json(successResponse("No vehicles found", []));
-      }
-
-      res.json(successResponse("Vehicles retrieved successfully", vehicles));
-    } catch (error) {
-      next(error);
+    if (vehicles.length === 0) {
+      return res.json(successResponse("No vehicles found", []));
     }
-  }
 
-  static async getVehicleById(req: Request, res: Response, next: NextFunction) {
-    try {
-      const vehicleId = parseInt(req.params.vehicleId!);
-      const vehicle = await VehicleService.getVehicleById(vehicleId);
-      res.json(successResponse("Vehicle retrieved successfully", vehicle));
-    } catch (error) {
-      next(error);
-    }
+    res.json(successResponse("Vehicles retrieved successfully", vehicles));
+  } catch (error) {
+    next(error);
   }
+};
 
-  static async updateVehicle(req: Request, res: Response, next: NextFunction) {
-    try {
-      const vehicleId = parseInt(req.params.vehicleId!);
-      const vehicle = await VehicleService.updateVehicle(vehicleId, req.body);
-      res.json(successResponse("Vehicle updated successfully", vehicle));
-    } catch (error) {
-      next(error);
-    }
+export const getVehicleByIdController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const vehicleId = parseInt(req.params.vehicleId!);
+    const vehicle = await getVehicleById(vehicleId);
+    res.json(successResponse("Vehicle retrieved successfully", vehicle));
+  } catch (error) {
+    next(error);
   }
+};
 
-  static async deleteVehicle(req: Request, res: Response, next: NextFunction) {
-    try {
-      const vehicleId = parseInt(req.params.vehicleId!);
-      await VehicleService.deleteVehicle(vehicleId);
-      res.json(successResponse("Vehicle deleted successfully"));
-    } catch (error) {
-      next(error);
-    }
+export const updateVehicleController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const vehicleId = parseInt(req.params.vehicleId!);
+    const vehicle = await updateVehicle(vehicleId, req.body);
+    res.json(successResponse("Vehicle updated successfully", vehicle));
+  } catch (error) {
+    next(error);
   }
-}
+};
+
+export const deleteVehicleController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const vehicleId = parseInt(req.params.vehicleId!);
+    await deleteVehicle(vehicleId);
+    res.json(successResponse("Vehicle deleted successfully"));
+  } catch (error) {
+    next(error);
+  }
+};
